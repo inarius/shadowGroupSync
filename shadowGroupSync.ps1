@@ -220,10 +220,11 @@ Function Confirm-Destination($destou, $groupname) {
   }
 
   #Check that a group with the same SAM Account Name as our destination group does not exist elsewhere in AD - this attribute must be unique within a domain
-  $adGroup = Get-ADGroup -Filter {SamAccountName -eq $groupname} -ErrorAction Continue
-
+  $adsearch = ([adsisearcher]"samAccountName=$groupname" ).FindOne()
+  $adgroup = $adsearch.GetDirectoryEntry()
+  
   #If group already exists ensure it's in the expected OU
-  if($adGroup -and (([string]([ADSI]"LDAP://$adgroup").PSBase.Parent.distinguishedName) -ne $destou))
+  if($adgroup.distinguishedName -and ($adgroup.PSBase.Parent.distinguishedName) -ne $destou)
   {
     Write-Error "Skipping sync of $groupname, a group with the same SAM Account Name already exists in a different part of the hierarchy: $($adGroup.DistinguishedName)"
     return $false
