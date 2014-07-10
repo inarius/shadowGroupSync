@@ -222,7 +222,7 @@ Function Confirm-Destination($destou, $groupname) {
   #Check that a group with the same SAM Account Name as our destination group does not exist elsewhere in AD - this attribute must be unique within a domain
   if ($adsearch = ([adsisearcher]"samAccountName=$groupname").FindOne())
   {
-    $adgroup = $adsearch.GetDirectoryEntry() -Erroraction continue
+    $adgroup = $adsearch.GetDirectoryEntry()
   
     #If group already exists ensure it's in the expected OU
     if($adgroup.distinguishedName -and ($adgroup.PSBase.Parent.distinguishedName) -ne $destou)
