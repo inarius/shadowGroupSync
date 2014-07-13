@@ -94,8 +94,7 @@ Function Get-SourceObjects($searchbase, $domain, $type, $scope)
 
     Catch
     {
-      Write-Error $_
-      Exit
+      throw $_
     }
 
     return $obj
@@ -205,18 +204,15 @@ Function Confirm-Destination($destou, $groupname) {
     Get-ADOrganizationalUnit -Identity $destou -ErrorAction Continue | Out-Null
   }
 
+  catch [Microsoft.ActiveDirectory.Management.ADIdentityNotFoundException]
+  {
+    Write-Error "Skipping sync of $groupname, destination OU does not exist: $destou"
+    return $false
+  }
+
   catch
   {
-    if($_.Exception.GetType().Name -eq "ADIdentityNotFoundException")
-    {
-      Write-Error "Skipping sync of $groupname, destination OU does not exist: $destou"
-      return $false
-    }
-    
-    else
-    {
-      throw
-    }
+    throw $_
   }
 
   #Check that a group with the same SAM Account Name as our destination group does not exist elsewhere in AD - this attribute must be unique within a domain
