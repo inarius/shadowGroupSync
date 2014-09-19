@@ -130,7 +130,7 @@ Function Add-ShadowGroupMember($group, $member)
 {
   Try
   {
-    Write-Verbose "Adding $($member.Name)"
+    Write-Verbose "Adding $($member.Name)."
     Add-ADGroupMember -Identity $group -Member $member.objectGUID -ErrorAction Stop
   }
 
@@ -150,7 +150,7 @@ Function Remove-ShadowGroupMember($group, $member)
 {
   Try
   {
-    Write-Verbose "Removing $($member.Name)"
+    Write-Verbose "Removing $($member.Name)."
     Remove-ADGroupMember -Identity $group -Member $member.objectGUID -Confirm:$false -ErrorAction Stop
   }
 
@@ -248,7 +248,7 @@ foreach ($cs in $csv)
   #If the group is empty, populate the group.
   if ((!$groupmembers) -and ($obj))
   {
-    Write-Verbose "$($cs.GroupName) is empty"
+    Write-Verbose "$($cs.GroupName) is empty."
     
     foreach ($o in $obj)
     {
@@ -259,7 +259,7 @@ foreach ($cs in $csv)
   #If there are no members in the sync source, empty the group.
   elseif (($obj -eq $null) -and ($groupmembers))
   {
-    Write-Verbose "Emptying $($cs.GroupName)"
+    Write-Verbose "Emptying $($cs.GroupName)."
 
     foreach ($member in $groupmembers)
     {
@@ -282,6 +282,11 @@ foreach ($cs in $csv)
         Remove-ShadowGroupMember $cs.GroupName $_
       }
     }
+  }
+
+  else
+  {
+    Write-Verbose "Nothing to do for $obj."
   }
   
   Write-Verbose "$($cs.GroupName) sync complete."
