@@ -108,16 +108,21 @@ Function Get-SourceObjects($searchbase, $domain, $type, $scope)
 #        Example: "OU=ShadowGroups,DC=contoso,DC=com"
 #Param3: $scope - The grouptype the shadowgroup should be created as (If it doesn't exist)
 #        Example: 0 (Distribution) or 1 (Security)
-Function Get-ShadowGroupMembers($groupname, $destou, $grouptype)
+Function Get-ShadowGroupMembers($groupname, $destou, $grouptype, $create)
 {
-  if (!(Get-ADGroup -Filter {SamAccountName -eq $groupname} -SearchBase $destou))
+  if (!(Get-ADGroup -Filter {SamAccountName -eq $groupname} -SearchBase $destou) -and $create)
   {
     #For use with Fine Grained Password Policies, the GroupScope should be Global.
     #If you are using this script with child domains, it may need to be set to Universal.
+    Write-Verbose "Creating group $groupname."
     New-ADGroup -Name $groupname -SamAccountName $groupname -Path $destou -Groupcategory $grouptype -GroupScope Global
   }
+
+  elseif (Get-ADGroup -Filter {SamAccountName -eq $groupname} -SearchBase $destou)
+  {
+    $groupmembers = Get-ADGroupMember -Identity $groupname
+  }
   
-  $groupmembers = Get-ADGroupMember -Identity $groupname
   return $groupmembers
 }
 
@@ -197,7 +202,8 @@ Function Check-SourceScope($scope)
 #        Example: "OU=ShadowGroups,DC=contoso,DC=com"
 #Param2: $groupname - The shadowgroup name to put members in.
 #        Example: "ShadowGroup-1"
-Function Confirm-Destination($destou, $groupname) {
+Function Confirm-Destination($destou, $groupname) 
+{
   #Check that the destination OU exists, otherwise we won't be able to create the shadow group at all
   try
   {
@@ -243,7 +249,7 @@ foreach ($cs in $csv)
 
   #Populate the source and destination set for comparison.
   $obj = Get-SourceObjects $cs.SourceOU $cs.Domain $cs.ObjType (Check-SourceScope $cs.Recurse)
-  $groupmembers = Get-ShadowGroupMembers $cs.Groupname $cs.Destou (Check-GroupCategory $cs.GroupType)
+  $groupmembers = Get-ShadowGroupMembers $cs.Groupname $cs.Destou (Check-GroupCategory $cs.GroupType) (!($obj -eq $null))
   
   #If the group is empty, populate the group.
   if ((!$groupmembers) -and ($obj))
@@ -286,7 +292,7 @@ foreach ($cs in $csv)
 
   else
   {
-    Write-Verbose "Nothing to do for $obj."
+    Write-Verbose "Nothing to do for $($cs.GroupName)."
   }
   
   Write-Verbose "$($cs.GroupName) sync complete."
