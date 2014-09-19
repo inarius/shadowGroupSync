@@ -64,6 +64,10 @@ Once you have downloaded the script, you will need to create the CSV file where 
 
 You can place the CSV file anywhere on the system, as long as the script can be told where to find it.
 
+Note: The script will not create the destination groups until there is at least one object to sync. This is to stop creating groups that will stay empty during the same sync run. 
+
+However, groups will never be deleted, so empty groups can exist if a group is emptied.
+
 Usage
 ---------------------
 
