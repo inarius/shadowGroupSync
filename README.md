@@ -4,6 +4,8 @@ shadowGroupSync
 Description
 ---------------------
 
+Forked from davegreen/shadowGroupSync to prevent unwanted edits... 
+
 A PowerShell script that provides an easy way to manage Active Directory shadow groups. 
 This script requires the [PowerShell Active Directory module](http://technet.microsoft.com/en-us/library/ee617195.aspx) from Microsoft.
 
