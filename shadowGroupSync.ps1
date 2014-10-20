@@ -3,7 +3,7 @@
   A PowerShell script that provides an easy way to manage Active Directory shadow groups.
 
   .Description
-  A PowerShell script that provides an easy way to manage Active Directory shadow groups. This script requires the PowerShell Active Directory module from Microsoft.
+  Forked from davegreen/shadowGroupSync to prevent unwanted edits... A PowerShell script that provides an easy way to manage Active Directory shadow groups. This script requires the PowerShell Active Directory module from Microsoft.
     
   .Parameter File
   The location of the shadow group file to parse.
@@ -17,8 +17,8 @@
   Author: David Green
   
   .Link
+  https://github.com/inarius/shadowGroupSync.git
   http://www.tookitaway.co.uk
-  https://github.com/davegreen/shadowGroupSync.git
 #>
 
 #--CSV Format--
