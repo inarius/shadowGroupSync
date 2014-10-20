@@ -1,0 +1,4 @@
+GroupName,GroupType,Domain,ObjType,SourceOU,DestOU,Recurse
+VCPA Computers,Security,PADEV.COV,computer,"DC=PADEV,DC=COV","OU=Groups,DC=PADEV,DC=COV",SubTree
+VCPA Servers,Security,PADEV.COV,computer,"OU=Domain Controllers,DC=PADEV,DC=COV","OU=Groups,DC=PADEV,DC=COV",SubTree
+VCPA Users,Security,PADEV.COV,user,"OU=Users,DC=PADEV,DC=COV;OU=Test,DC=PADEV,DC=COV","OU=Groups,DC=PADEV,DC=COV",SubTree

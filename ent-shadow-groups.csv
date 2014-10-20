@@ -1,0 +1,5 @@
+GroupName,GroupType,Domain,ObjType,SourceOU,DestOU,Recurse
+VCPA Computers,Security,ent.co.ventura.ca.us,computer,"OU=VCPA,DC=ent,DC=co,DC=ventura,DC=ca,DC=us","OU=Groups,OU=VCPA,DC=ent,DC=co,DC=ventura,DC=ca,DC=us",SubTree
+VCPA Servers,Security,ent.co.ventura.ca.us,computer,"OU=Servers,OU=VCPA,DC=ent,DC=co,DC=ventura,DC=ca,DC=us;OU=Servers,OU=Dev,OU=VCPA,DC=ent,DC=co,DC=ventura,DC=ca,DC=us","OU=Groups,OU=VCPA,DC=ent,DC=co,DC=ventura,DC=ca,DC=us",SubTree
+VCPA Users,Security,ent.co.ventura.ca.us,user,"OU=Users,OU=VCPA,DC=ent,DC=co,DC=ventura,DC=ca,DC=us;OU=Test,OU=VCPA,DC=ent,DC=co,DC=ventura,DC=ca,DC=us","OU=Groups,OU=VCPA,DC=ent,DC=co,DC=ventura,DC=ca,DC=us",SubTree
+VCPA Service Accounts,Security,ent.co.ventura.ca.us,user,"OU=ServiceAccounts,OU=VCPA,DC=ent,DC=co,DC=ventura,DC=ca,DC=us","OU=Groups,OU=VCPA,DC=ent,DC=co,DC=ventura,DC=ca,DC=us",SubTree
