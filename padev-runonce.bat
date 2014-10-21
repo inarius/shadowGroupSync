@@ -1,1 +1,1 @@
-powershell.exe -NoProfile -ExecutionPolicy Bypass -command "e:\shadowGroupSync\shadowGroupSync.ps1 -verbose -file e:\shadowGroupSync\padev-shadow-groups.csv" 2>&1 >> shadowGroupSync.log"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -command "e:\shadowGroupSync\shadowGroupSync.ps1 -file e:\shadowGroupSync\padev-shadow-groups.csv" 2>&1 > shadowGroupSync.log"
