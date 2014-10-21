@@ -1,1 +1,1 @@
-powershell.exe -NoProfile -ExecutionPolicy Bypass -command "e:\shadowGroupSync\shadowGroupSync.ps1 -file e:\shadowGroupSync\ent-shadow-groups.csv | tee -file ('e:\shadowGroupSync\shadowGroupSync-'+ (Get-Date -format yyyy.M.d-HH.mm) + '.log')"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -command "%~dp0\shadowGroupSync.ps1 -file %~dp0\ent-shadow-groups.csv" 2>&1 > %~dp0\shadowGroupSync.log"
