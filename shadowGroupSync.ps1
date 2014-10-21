@@ -36,7 +36,7 @@ param(
 
 $csv = Import-Csv $File
 
-#For logging, Run with: powershell.exe -ExecutionPolicy Bypass -command "%~dp0\shadowGroupSync.ps1 -verbose -file %~dp0\shadow-groups.csv" 2>&1 > %~dp0\shadowGroupSync.log"
+#For logging, Run with: powershell.exe -NoProfile -ExecutionPolicy Bypass -command "%~dp0\shadowGroupSync.ps1 -verbose -file %~dp0\shadow-groups.csv" 2>&1 > %~dp0\shadowGroupSync.log"
 Import-Module ActiveDirectory -ErrorAction Stop
 
 #Gets AD objects from the specified OU or OUs and returns the collection.
